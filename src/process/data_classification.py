@@ -1,9 +1,8 @@
 import re
 
+from src.constants import PAYMENT_DAYS
 from src.exceptions.data_exceptions import EmployeeNameException, PaymentDataException, PaymentDayInformationException
 from src.model.payment import Payment
-
-PAYMENT_DAYS = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
 
 
 def check_payment_data(payment_data):
