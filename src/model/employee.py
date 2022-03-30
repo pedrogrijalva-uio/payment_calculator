@@ -1,4 +1,5 @@
 from src.model.payment import Payment
+from functools import reduce
 
 
 class Employee:
@@ -6,6 +7,8 @@ class Employee:
     def __init__(self, name):
         self.name = name
         self.payments = []
+        self.total_payment = 0
 
-    def add_payments(self, payment: Payment):
-        self.payments.add(payment)
+    def calculate_total_payment(self):
+        total_payments = [payment.total for payment in self.payments]
+        self.total_payment = reduce((lambda x, y: x + y), total_payments)

@@ -11,14 +11,14 @@ class TestPayment(unittest.TestCase):
         payment = Payment("MO", range_hours)
 
         with self.assertRaises(InvalidHourRangeException):
-            payment.validate_range()
+            payment.validate_payment_hour_range()
 
     def test_should_raise_invalid_hour_value_exception_when_start_hour_is_larger_than_end_hour(self):
         range_hours = "11:00-10:00"
         payment = Payment("MO", range_hours)
 
         with self.assertRaises(InvalidHourRangeException):
-            payment.validate_range()
+            payment.validate_payment_hour_range()
 
     def test_should_raise_invalid_hour_range_exception_when_hour_range_does_not_matches_rules(self):
         received_range_hour = "00:01-10:00"
@@ -41,7 +41,7 @@ class TestPayment(unittest.TestCase):
         payment = Payment("MO", received_range_hour)
         expected_payment = 30
         payment.payment_hour_range = "09:01-18:00"
-
-        payment.calculate_worked_hours(2)
+        payment.start_hour_range, payment.end_hour_range = payment._payment_hour_ranges("09:01-18:00")
+        payment.calculate_worked_hours()
 
         self.assertEqual(expected_payment, payment.total)
