@@ -10,7 +10,7 @@ class TestDataClassification(unittest.TestCase):
     def test_should_throw_payment_day_information_exception_when_payment_date_is_incorrect(self):
         test_payment_date = "MO0:00-12:00"
         with self.assertRaises(PaymentDayInformationException):
-            check_hour_payment_format(test_payment_date, "ME")
+            check_hour_payment_format(test_payment_date)
 
     def test_should_throw_exception_when_data_is_not_well_constructed(self):
         test_data = "RENEMO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00"
